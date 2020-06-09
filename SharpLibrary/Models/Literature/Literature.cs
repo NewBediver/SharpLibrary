@@ -16,25 +16,25 @@ namespace SharpLibrary.Models
         public DateTime DebitDate { get; set; }
 
         public long LiteratureTypeId { get; set; }
-        public virtual LiteratureType Type { get; set; }
+        public LiteratureType Type { get; set; }
 
         public long ShelfId { get; set; }
-        public virtual Shelf Shelf { get; set; }
+        public Shelf Shelf { get; set; }
 
         public long StatusId { get; set; }
-        public virtual Status Status { get; set; }
+        public Status Status { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
-        public virtual ICollection<Publishing> Publishings { get; set; }
-        public virtual ICollection<Author> Authors { get; set; }
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public ICollection<GenreLiterature> GenreLiteratures { get; set; }
+        public ICollection<PublishingLiterature> PublishingLiteratures { get; set; }
+        public ICollection<AuthorLiterature> AuthorLiteratures { get; set; }
+        public ICollection<TransactionLiterature> TransactionLiteratures { get; set; }
 
         public Literature()
         {
-            Genres = new List<Genre>();
-            Publishings = new List<Publishing>();
-            Authors = new List<Author>();
-            Transactions = new List<Transaction>();
+            GenreLiteratures = new List<GenreLiterature>();
+            PublishingLiteratures = new List<PublishingLiterature>();
+            AuthorLiteratures = new List<AuthorLiterature>();
+            TransactionLiteratures = new List<TransactionLiterature>();
         }
     }
 }

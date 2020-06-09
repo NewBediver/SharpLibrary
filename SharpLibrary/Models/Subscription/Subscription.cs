@@ -9,12 +9,12 @@ namespace SharpLibrary.Models
         public DateTime DateOfStart { get; set; }
 
         public long SubscriptionTypeId { get; set; }
-        public virtual SubscriptionType Type { get; set; }
+        public SubscriptionType Type { get; set; }
 
         public long UserId { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
 
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
 
         public Subscription()
         {

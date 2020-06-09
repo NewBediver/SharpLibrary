@@ -8,7 +8,7 @@ namespace SharpLibrary.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Subscription> Subscriptions { get; set; }
+        public ICollection<Subscription> Subscriptions { get; set; }
 
         public SubscriptionType()
         {

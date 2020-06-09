@@ -10,11 +10,11 @@ namespace SharpLibrary.Models
         public string Patronymic { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Literature> Literatures { get; set; }
+        public ICollection<AuthorLiterature> AuthorLiteratures { get; set; }
 
         public Author()
         {
-            Literatures = new List<Literature>();
+            AuthorLiteratures = new List<AuthorLiterature>();
         }
     }
 }

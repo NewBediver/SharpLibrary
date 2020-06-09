@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @await Html.PartialAsync("_Favicons")
+    <title>@ViewBag.Title</title>
+    <link asp-href-include="~/css/bundle.min.css" rel="stylesheet" />
+    <style>
+        .input-validation-error {
+            border-color: red;
+            background-color: #fee;
+        }
+    </style>
+    <script asp-src-include="~/js/bundle.min.js"></script>
+</head>
+<body class="m-1 p-1">
+    <div class="bg-info p-2">
+        <h4>@ViewBag.Title</h4>
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success">@TempData["message"]</div>
+        }
+    </div>
+    @RenderBody() 
+</body>
+</html>

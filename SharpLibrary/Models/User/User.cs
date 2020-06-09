@@ -12,11 +12,11 @@ namespace SharpLibrary.Models
         public DateTime DateOfBirth { get; set; }
 
         public long RoleId { get; set; }
-        public virtual Role Role { get; set; }
+        public Role Role { get; set; }
 
-        public virtual Subscription Subscription { get; set; }
+        public Subscription Subscription { get; set; }
 
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
 
         public User()
         {

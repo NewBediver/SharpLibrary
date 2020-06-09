@@ -8,7 +8,7 @@ namespace SharpLibrary.Models
         public string Number { get; set; }
 
         public long RackId { get; set; }
-        public virtual Rack Rack { get; set; }
+        public Rack Rack { get; set; }
 
         public ICollection<Literature> Literatures { get; set; }
 

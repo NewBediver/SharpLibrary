@@ -5,7 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200609055424_Init.cs" />
+    <Compile Remove="Migrations\20200609055424_Init.Designer.cs" />
+    <Compile Remove="Migrations\20200609063537_Init.cs" />
+    <Compile Remove="Migrations\20200609063537_Init.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -14,11 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Authentification\Controllers\" />
     <Folder Include="Areas\Authentification\Data\" />
     <Folder Include="Areas\Authentification\Models\" />

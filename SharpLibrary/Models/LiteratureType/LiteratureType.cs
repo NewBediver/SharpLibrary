@@ -8,7 +8,7 @@ namespace SharpLibrary.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Literature> Literatures { get; set; }
+        public ICollection<Literature> Literatures { get; set; }
 
         public LiteratureType()
         {

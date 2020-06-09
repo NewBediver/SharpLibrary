@@ -11,19 +11,16 @@ namespace SharpLibrary.Models
         public string Description { get; set; }
 
         public long TransactionTypeId { get; set; }
-        public virtual TransactionType Type { get; set; }
+        public TransactionType Type { get; set; }
 
         public long SubscriptionId { get; set; }
-        public virtual Subscription Subscription { get; set; }
+        public Subscription Subscription { get; set; }
 
-        public long UserId { get; set; }
-        public virtual User Worker { get; set; }
-
-        public ICollection<Literature> Literatures { get; set; }
+        public ICollection<TransactionLiterature> TransactionLiteratures { get; set; }
 
         public Transaction()
         {
-            Literatures = new List<Literature>();
+            TransactionLiteratures = new List<TransactionLiterature>();
         }
 
     }

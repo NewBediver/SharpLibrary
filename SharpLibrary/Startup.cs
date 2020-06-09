@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SharpLibrary.Models;
 
@@ -8,10 +10,18 @@ namespace SharpLibrary
 {
     public class Startup
     {
+        private IConfiguration _configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ILiteratureRepository, FakeLiteratureRepository>();
-
+            services.AddDbContext<ApplicationDBContext>(options =>
+                options.UseSqlServer(_configuration["Data:SharpLibrary:ConnectionString"]));
+            services.AddTransient<IGenreRepository, GenreDBRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -32,10 +42,7 @@ namespace SharpLibrary
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Literature}/{action=List}/{id?}");
-                routes.MapRoute(
-                    name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    template: "{area=Admin}/{controller=Genre}/{action=Index}/{id?}");
             });
         }
     }
