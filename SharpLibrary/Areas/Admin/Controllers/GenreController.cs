@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SharpLibrary.Models;
+using SharpLibrary.ViewModels;
 using System.Linq;
 
 namespace SharpLibrary.Areas.Admin.Controllers
@@ -7,15 +8,29 @@ namespace SharpLibrary.Areas.Admin.Controllers
     public class GenreController : Controller
     {
         private IGenreRepository _repository;
+        public int PageSize;
 
         public GenreController(IGenreRepository rep)
         {
             _repository = rep;
+            PageSize = 9;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View(_repository.Genres);
+            return View(new ListViewModel<Genre>
+            {
+                Entities = _repository.Genres
+                    .OrderBy(elm => elm.Id)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = _repository.Genres.Count()
+                }
+            }); ;
         }
 
         public IActionResult Edit(long genreId)

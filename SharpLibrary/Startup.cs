@@ -22,6 +22,7 @@ namespace SharpLibrary
             services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(_configuration["Data:SharpLibrary:ConnectionString"]));
             services.AddTransient<IGenreRepository, GenreDBRepository>();
+            services.AddTransient<IAuthorRepository, AuthorDBRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -40,6 +41,16 @@ namespace SharpLibrary
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "paginationGenre",
+                    template: "Administrator/Genres/Page{page}",
+                    defaults: new { Area = "Admin", Controller = "Genre", Action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "paginationAuthor",
+                    template: "Administrator/Authors/Page{page}",
+                    defaults: new { Area = "Admin", Controller = "Author", Action = "Index" }
+                    );
                 routes.MapRoute(
                     name: "default",
                     template: "{area=Admin}/{controller=Genre}/{action=Index}/{id?}");

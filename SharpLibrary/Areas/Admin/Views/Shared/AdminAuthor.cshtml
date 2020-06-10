@@ -1,0 +1,18 @@
+﻿@model Author
+
+<div class="col-md-4 row pt-1 pb-1 mr-0 ml-0">
+    <div class="card bg-light w-100">
+        <div class="card-header">ID: @Model.Id</div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Surname @Model.Name @Model.Patronymic</h5>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <form asp-area="Admin" asp-controller="Author" asp-action="Delete" method="post">
+                <a asp-area="Admin" asp-controller="Author" asp-action="Edit" class="btn btn-sm btn-warning" asp-route-authorId=@Model.Id>Редактировать</a>
+                <input type="hidden" name="AuthorId" value=@Model.Id />
+                <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+            </form>
+        </div>
+    </div>
+</div>

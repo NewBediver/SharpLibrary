@@ -1,12 +1,12 @@
-﻿@model ListViewModel<Genre>
+﻿@model ListViewModel<Author>
 
 @{
-    ViewBag.Title = "Жанры";
+    ViewBag.Title = "Авторы";
 }
 
 <div class="container-fluid">
     <div class="m-3">
-        <a asp-area="Admin" asp-controller="Genre" asp-action="Create" class="btn btn-primary">Добавить жанр</a>
+        <a asp-area="Admin" asp-controller="Author" asp-action="Create" class="btn btn-primary">Добавить автора</a>
     </div>
     <div page-model=@Model.PagingInfo page-action="Index" page-classes-enabled="true"
          page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary"
@@ -14,7 +14,7 @@
     <div class="card-group">
         @foreach (var element in Model.Entities)
         {
-            @await Html.PartialAsync("AdminGenre", element)
+            @await Html.PartialAsync("AdminAuthor", element)
         }
     </div>
 </div>
