@@ -1,0 +1,47 @@
+﻿@model RackViewModel
+
+@{ 
+    if (Model.Rack.Number == null)
+    {
+        ViewBag.Title = $"Добавление нового стеллажа";
+    }
+    else
+    {
+        ViewBag.Title = $"Редактирование стелажа \"{Model.Rack.Number}\"";
+    }
+}
+
+<div class="container-fluid mb-3 mt-3">
+    <form asp-area="Admin" asp-controller="Rack" asp-action="Edit" method="post">
+        <input type="hidden" asp-for=@Model.Rack.Id />
+        <div class="form-group row">
+            <label asp-for=@Model.Rack.Number class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <div>
+                    <span asp-validation-for=@Model.Rack.Number class="text-danger"></span>
+                </div>
+                <input asp-for=@Model.Rack.Number class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for=@Model.Rack.LibraryId class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <div>
+                    <span asp-validation-for=@Model.Rack.LibraryId class="text-danger"></span>
+                </div>
+                <select asp-for=@Model.Rack.LibraryId class="form-control">
+                    @foreach (var element in Model.Libraries)
+                    {
+                        <option value=@element.Id  selected=@(element.Id == (Model.Rack?.LibraryId ?? 0))>
+                            @element.Name
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Сохранить изменения</button>
+            <a asp-area="Admin" asp-controller="Rack" asp-action="Index">Отмена</a>
+        </div>
+    </form>
+</div>

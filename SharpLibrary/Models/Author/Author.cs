@@ -8,15 +8,15 @@ namespace SharpLibrary.Models
     {
         public long Id { get; set; }
 
-        [DisplayName("Имя автора")]
+        [DisplayName("Имя")]
         [Required(ErrorMessage = "Пожалуйста введите имя автора")]
         public string Name { get; set; }
 
-        [DisplayName("Фамилия автора")]
+        [DisplayName("Фамилия")]
         [Required(ErrorMessage = "Пожалуйста введите фамилию автора")]
         public string Surname { get; set; }
 
-        [DisplayName("Отчество автора")]
+        [DisplayName("Отчество")]
         [Required(ErrorMessage = "Пожалуйста введите отчество автора")]
         public string Patronymic { get; set; }
 
