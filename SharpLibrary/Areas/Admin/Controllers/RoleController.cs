@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SharpLibrary.Models;
 using SharpLibrary.ViewModels;
 
@@ -24,6 +25,7 @@ namespace SharpLibrary.Areas.Admin.Controllers
             return View(new ListViewModel<Role>
             {
                 Entities = _repository.Roles
+                    .Include(elm => elm.Users)
                     .OrderBy(elm => elm.Id)
                     .Skip((page - 1) * PageSize)
                     .Take(PageSize),

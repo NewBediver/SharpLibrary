@@ -1,0 +1,64 @@
+﻿@model User
+
+<div class="col-md-4 row pt-1 pb-1 mr-0 ml-0">
+    <div class="card bg-light w-100">
+        <div class="card-header">ID: @Model.Id</div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Surname @Model.Name @Model.Patronymic</h5>
+            <p class="card-text">Дата рождения: @Model.DateOfBirth</p>
+            <p class="card-text">Роль: @Model.Role.Name</p>
+            @if (Model.Subscription != null)
+            {
+                <p class="card-text">Читательский абонемент: @Model.Subscription.Id (@Model.Subscription.Type.Name) </p>
+                <p class="card-text">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Транзакции
+                            </a>
+                            @foreach (var transation in Model.Subscription.Transactions)
+                            {
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">@transation.Id (@transation.Type.Name)</a>
+                                        <ul class="dropdown-menu">
+                                            @foreach (var literature in transation.TransactionLiteratures.Select(elm => elm.Literature))
+                                            {
+                                                <li><a class="dropdown-item" href="#">@literature.Name</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                </ul>
+                            }
+                        </li>
+                    </ul>
+                </p>
+                <p class="card-text">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Литература
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach (var literatureList in Model.Subscription.Transactions.Where(elm => elm.Type.Name == "Выдача").Select(elm => elm.TransactionLiteratures.Select(elm => elm.Literature)))
+                                {
+                                    @foreach (var literature in literatureList)
+                                    {
+                                        <li><a class="dropdown-item" href="#">@literature.Name</a></li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </p>
+            }
+        </div>
+        <div class="card-footer bg-transparent">
+            <form asp-area="Admin" asp-controller="User" asp-action="Delete" method="post">
+                <a asp-area="Admin" asp-controller="User" asp-action="Edit" class="btn btn-sm btn-warning" asp-route-userId=@Model.Id>Редактировать</a>
+                <input type="hidden" name="UserId" value=@Model.Id />
+                <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+            </form>
+        </div>
+    </div>
+</div>

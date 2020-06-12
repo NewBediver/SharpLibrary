@@ -131,15 +131,18 @@ namespace SharpLibrary.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("InventoryNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("LiteratureTypeId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("LongDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Pages")
@@ -152,6 +155,7 @@ namespace SharpLibrary.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ShortDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("StatusId")
@@ -318,9 +322,15 @@ namespace SharpLibrary.Migrations
                     b.Property<long>("SubscriptionTypeId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SubscriptionTypeId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Subscriptions");
                 });
@@ -353,6 +363,7 @@ namespace SharpLibrary.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
@@ -427,25 +438,23 @@ namespace SharpLibrary.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Patronymic")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("SubscriptionId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Surname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("SubscriptionId");
 
                     b.ToTable("Users");
                 });
@@ -541,6 +550,12 @@ namespace SharpLibrary.Migrations
                         .HasForeignKey("SubscriptionTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SharpLibrary.Models.User", "User")
+                        .WithOne("Subscription")
+                        .HasForeignKey("SharpLibrary.Models.Subscription", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SharpLibrary.Models.Transaction", b =>
@@ -584,10 +599,6 @@ namespace SharpLibrary.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SharpLibrary.Models.Subscription", "Subscription")
-                        .WithMany("Users")
-                        .HasForeignKey("SubscriptionId");
                 });
 #pragma warning restore 612, 618
         }

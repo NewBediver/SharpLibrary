@@ -16,6 +16,7 @@ namespace SharpLibrary.Models
         [Required(ErrorMessage = "Пожалуйста введите описание библиотеки")]
         public string Description { get; set; }
 
+        [DisplayName("Стеллажи")]
         public ICollection<Rack> Racks { get; set; }
 
         public Library()

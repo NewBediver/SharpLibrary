@@ -6,6 +6,21 @@
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
             <p class="card-text">@Model.Description</p>
+            <p class="card-text">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Пользователи
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var user in Model.Users)
+                            {
+                                <li><a class="dropdown-item" href="#">@user.Surname @user.Name @user.Patronymic</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </p>
         </div>
         <div class="card-footer bg-transparent">
             <form asp-area="Admin" asp-controller="Role" asp-action="Delete" method="post">

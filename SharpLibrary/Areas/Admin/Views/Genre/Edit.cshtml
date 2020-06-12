@@ -1,7 +1,7 @@
 ﻿@model Genre
 
 @{ 
-    if (Model.Name == null)
+    if (Model.Id == 0)
     {
         ViewBag.Title = $"Добавление нового жанра";
     }
@@ -13,23 +13,23 @@
 
 <div class="container-fluid mb-3 mt-3">
     <form asp-area="Admin" asp-controller="Genre" asp-action="Edit" method="post">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for=@Model.Id />
         <div class="form-group row">
-            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            <label asp-for=@Model.Name class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
                 <div>
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <span asp-validation-for=@Model.Name class="text-danger"></span>
                 </div>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for=@Model.Name class="form-control" />
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+            <label asp-for=@Model.Description class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
                 <div>
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <span asp-validation-for=@Model.Description class="text-danger"></span>
                 </div>
-                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                <textarea asp-for=@Model.Description class="form-control" rows="5"></textarea>
             </div>
         </div>
         <div class="text-center">

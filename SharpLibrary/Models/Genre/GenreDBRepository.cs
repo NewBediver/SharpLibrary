@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace SharpLibrary.Models
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,10 +25,12 @@ namespace SharpLibrary.Models
             }
             else
             {
-                Genre dbEntry = _context.Genres.FirstOrDefault(elm => elm.Id == author.Id);
+                Author dbEntry = _context.Authors.FirstOrDefault(elm => elm.Id == author.Id);
                 if (dbEntry != null)
                 {
+                    dbEntry.Surname = author.Surname;
                     dbEntry.Name = author.Name;
+                    dbEntry.Patronymic = author.Patronymic;
                     dbEntry.Description = author.Description;
                 }
             }

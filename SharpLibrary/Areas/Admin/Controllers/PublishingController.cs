@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SharpLibrary.Models;
 using SharpLibrary.ViewModels;
 
@@ -21,6 +22,7 @@ namespace SharpLibrary.Areas.Admin.Controllers
             return View(new ListViewModel<Publishing>
             {
                 Entities = _repository.Publishings
+                    .Include(elm => elm.PublishingLiteratures).ThenInclude(elm => elm.Literature)
                     .OrderBy(elm => elm.Id)
                     .Skip((page - 1) * PageSize)
                     .Take(PageSize),

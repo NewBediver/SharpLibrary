@@ -7,6 +7,21 @@
             <h5 class="card-title">@Model.Number</h5>
             <p class="card-text">Стеллаж: @Model.Rack.Number</p>
             <p class="card-text">Библиотека: @Model.Rack.Library.Name</p>
+            <p class="card-text">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Литература
+                        </a>
+                        <ul class="dropdown-menu">
+                        @foreach (var literature in Model.Literatures)
+                        {
+                            <li><a class="dropdown-item" href="#">@literature.Name</a></li>
+                        }
+                        </ul>
+                    </li>
+                </ul>
+            </p>
         </div>
         <div class="card-footer bg-transparent">
             <form asp-area="Admin" asp-controller="Shelf" asp-action="Delete" method="post">

@@ -26,6 +26,7 @@ namespace SharpLibrary.Areas.Admin.Controllers
             {
                 Entities = _repository.Shelves
                     .Include(elm => elm.Rack).ThenInclude(elm => elm.Library)
+                    .Include(elm => elm.Literatures)
                     .OrderBy(elm => elm.Id)
                     .Skip((page - 1) * PageSize)
                     .Take(PageSize),

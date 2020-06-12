@@ -34,6 +34,9 @@ namespace SharpLibrary
             services.AddTransient<IRackRepository, RackDBRepository>();
             services.AddTransient<IShelfRepository, ShelfDBRepository>();
             services.AddTransient<ISubscriptionRepository, SubscriptionDBRepository>();
+            services.AddTransient<ILiteratureRepository, LiteratureDBRepository>();
+            services.AddTransient<IUserRepository, UserDBRepository>();
+            services.AddTransient<ITransactionRepository, TransactionDBRepository>();
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
@@ -107,6 +110,21 @@ namespace SharpLibrary
                     name: "paginationSubscription",
                     template: "Administrator/Subscriptions/Page{page}",
                     defaults: new { Area = "Admin", Controller = "Subscription", Action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "paginationLiterature",
+                    template: "Administrator/Literatures/Page{page}",
+                    defaults: new { Area = "Admin", Controller = "Literature", Action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "paginationUser",
+                    template: "Administrator/Users/Page{page}",
+                    defaults: new { Area = "Admin", Controller = "User", Action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "paginationTransaction",
+                    template: "Administrator/Transactions/Page{page}",
+                    defaults: new { Area = "Admin", Controller = "Transaction", Action = "Index" }
                     );
                 routes.MapRoute(
                     name: "default",

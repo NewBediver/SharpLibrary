@@ -6,6 +6,45 @@
         <div class="card-body">
             <h5 class="card-title">@Model.Number</h5>
             <p class="card-text">Библиотека: @Model.Library.Name</p>
+            <p class="card-text">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Литература
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach (var shelf in Model.Shelves)
+                        {
+                            @foreach (var literature in shelf.Literatures)
+                            {
+                                <a class="dropdown-item" href="#">@literature.Name</a>
+                            }
+                        }
+                    </div>
+                </div>
+            </p>
+            <p class="card-text">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Полки
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var shelf in Model.Shelves)
+                            {
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#">@shelf.Number</a>
+                                    <ul class="dropdown-menu">
+                                        @foreach (var literature in shelf.Literatures)
+                                        {
+                                            <li><a class="dropdown-item" href="#">@literature.Name</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </p>
         </div>
         <div class="card-footer bg-transparent">
             <form asp-area="Admin" asp-controller="Rack" asp-action="Delete" method="post">

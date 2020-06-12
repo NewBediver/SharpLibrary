@@ -6,6 +6,7 @@
         <div class="card-body">
             <p class="card-text">Дата получения: @Model.DateOfStart</p>
             <p class="card-text">Тип абонемента: @Model.Type.Name</p>
+            <p class="card-text">Владелец: @Model.User.Surname @Model.User.Name @Model.User.Patronymic</p>
         </div>
         <div class="card-footer bg-transparent">
             <form asp-area="Admin" asp-controller="Subscription" asp-action="Delete" method="post">

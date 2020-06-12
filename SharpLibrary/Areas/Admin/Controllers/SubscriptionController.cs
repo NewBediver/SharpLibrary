@@ -11,12 +11,14 @@ namespace SharpLibrary.Areas.Admin.Controllers
     {
         private ISubscriptionRepository _repository;
         private ISubscriptionTypeRepository _typeRepository;
+        private IUserRepository _userRepository;
         public int PageSize;
 
-        public SubscriptionController(ISubscriptionRepository rep, ISubscriptionTypeRepository typeRep)
+        public SubscriptionController(ISubscriptionRepository rep, ISubscriptionTypeRepository typeRep, IUserRepository userRep)
         {
             _repository = rep;
             _typeRepository = typeRep;
+            _userRepository = userRep;
             PageSize = 9;
         }
 
@@ -26,6 +28,7 @@ namespace SharpLibrary.Areas.Admin.Controllers
             {
                 Entities = _repository.Subscriptions
                     .Include(elm => elm.Type)
+                    .Include(elm => elm.User)
                     .OrderBy(elm => elm.Id)
                     .Skip((page - 1) * PageSize)
                     .Take(PageSize),
@@ -42,8 +45,12 @@ namespace SharpLibrary.Areas.Admin.Controllers
         {
             return View(new SubscriptionViewModel()
             {
-                Subscription = _repository.Subscriptions.FirstOrDefault(elm => elm.Id == subscriptionId),
-                Types = _typeRepository.SubscriptionTypes
+                Subscription = _repository.Subscriptions
+                    .Include(elm => elm.Type)
+                    .Include(elm => elm.User)
+                    .FirstOrDefault(elm => elm.Id == subscriptionId),
+                Types = _typeRepository.SubscriptionTypes,
+                Users = _userRepository.Users
             });
         }
 
@@ -64,7 +71,8 @@ namespace SharpLibrary.Areas.Admin.Controllers
             return View("Edit", new SubscriptionViewModel()
             {
                 Subscription = new Subscription(),
-                Types = _typeRepository.SubscriptionTypes
+                Types = _typeRepository.SubscriptionTypes,
+                Users = _userRepository.Users
             });
         }
 

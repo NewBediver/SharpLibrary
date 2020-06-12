@@ -24,6 +24,7 @@ namespace SharpLibrary.Models
         [Required(ErrorMessage = "Пожалуйста введите описание")]
         public string Description { get; set; }
 
+
         public ICollection<AuthorLiterature> AuthorLiteratures { get; set; }
 
         public Author()

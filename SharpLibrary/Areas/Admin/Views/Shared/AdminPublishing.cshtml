@@ -6,6 +6,19 @@
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
             <p class="card-text">@Model.Description</p>
+            <p class="card-text">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Литература
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach (var element in Model.PublishingLiteratures)
+                        {
+                            <a class="dropdown-item" href="#">@element.Literature.Name</a>
+                        }
+                    </div>
+                </div>
+            </p>
         </div>
         <div class="card-footer bg-transparent">
             <form asp-area="Admin" asp-controller="Publishing" asp-action="Delete" method="post">

@@ -16,6 +16,7 @@ namespace SharpLibrary.Models
         [Required(ErrorMessage = "Пожалуйста введите описание жанра")]
         public string Description { get; set; }
 
+
         public ICollection<GenreLiterature> GenreLiteratures { get; set; }
 
         public Genre()

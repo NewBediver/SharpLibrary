@@ -17,6 +17,7 @@ namespace SharpLibrary.Models
         public long LibraryId { get; set; }
         public Library Library { get; set; }
 
+        [DisplayName("Полки")]
         public ICollection<Shelf> Shelves { get; set; }
 
         public Rack()
