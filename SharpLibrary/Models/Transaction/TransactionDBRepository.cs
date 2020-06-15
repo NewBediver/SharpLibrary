@@ -41,7 +41,7 @@ namespace SharpLibrary.Models
             else
             {
                 Transaction dbEntry = _context.Transactions
-                    .Include(elm => elm.TransactionLiteratures)
+                    .Include(elm => elm.TransactionLiteratures).ThenInclude(elm => elm.Literature)
                     .FirstOrDefault(elm => elm.Id == transaction.Id);
                 if (dbEntry != null)
                 {

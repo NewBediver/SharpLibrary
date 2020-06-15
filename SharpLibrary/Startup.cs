@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
@@ -38,6 +39,12 @@ namespace SharpLibrary
             services.AddTransient<IUserRepository, UserDBRepository>();
             services.AddTransient<ITransactionRepository, TransactionDBRepository>();
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -53,6 +60,9 @@ namespace SharpLibrary
 
             app.UseStatusCodePages();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseMvc(routes =>
             {
