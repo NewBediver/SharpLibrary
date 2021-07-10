@@ -7,6 +7,7 @@
     "jquery-validation": "1.19.2",
     "jquery-validation-unobtrusive": "3.2.11",
     "bootstrap": "4.5.0",
+    "popper.js": "1.16.1",
     "gulp": "4.0.2",
     "gulp-concat": "2.6.1",
     "gulp-cssmin": "0.2.0",

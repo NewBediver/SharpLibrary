@@ -1,0 +1,20 @@
+﻿@model ListViewModel<Literature>
+
+@{
+    ViewBag.Title = "Литература";
+}
+
+<div class="container-fluid">
+    <div class="m-3">
+        <a asp-area="Admin" asp-controller="Literature" asp-action="Create" class="btn btn-primary">Добавить литературу</a>
+    </div>
+    <div page-model=@Model.PagingInfo page-action="Index" page-classes-enabled="true"
+         page-class="btn m-1" page-class-normal="btn-outline-secondary" page-class-selected="btn-outline-primary"
+         class="btn-group ml-3"></div>
+    <div class="card-group">
+        @foreach (var element in Model.Entities)
+        {
+            @await Html.PartialAsync("AdminLiterature", element)
+        }
+    </div>
+</div>

@@ -28,10 +28,48 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Редактируемые сущности
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" asp-area="Admin" asp-controller="Genre" asp-action="Index" asp-route-page="1">Литературные жанры</a>
-                        <a class="dropdown-item" asp-area="Admin" asp-controller="Author" asp-action="Index" asp-route-page="1">Авторы</a>
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Меню библиотек</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Shelf" asp-action="Index">Полки</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Rack" asp-action="Index">Стеллажи</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Library" asp-action="Index">Библиотеки</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Меню литературы</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Author" asp-action="Index">Авторы</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Publishing" asp-action="Index">Издательства</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="LiteratureType" asp-action="Index">Литературные типы</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Genre" asp-action="Index">Литературные жанры</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Status" asp-action="Index">Статусы</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Literature" asp-action="Index">Литература</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Меню пользователей</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Role" asp-action="Index">Роли</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Пользователи</a></li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#">Подменю читательских абонементов</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="SubscriptionType" asp-action="Index">Типы читательских абонементов</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Subscription" asp-action="Index">Читательские абонементы</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Меню транзакций</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="TransactionType" asp-action="Index">Типы транзакций</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Transaction" asp-action="Index">Транзакции</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -41,5 +79,36 @@
         }
     </nav>
     @RenderBody()
+
+    <script>
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            }
+            var $subMenu = $(this).next('.dropdown-menu');
+            $subMenu.toggleClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-submenu .show').removeClass('show');
+            });
+            return false;
+        });
+    </script>
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-submenu a::after {
+            transform: rotate(-90deg);
+            position: absolute;
+            right: 6px;
+            top: .8em;
+        }
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-left: .1rem;
+            margin-right: .1rem;
+        }
+    </style>
 </body>
 </html>

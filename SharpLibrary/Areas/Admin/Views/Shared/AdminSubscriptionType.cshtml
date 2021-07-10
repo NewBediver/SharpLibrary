@@ -1,0 +1,33 @@
+﻿@model SubscriptionType
+
+<div class="col-md-4 row pt-1 pb-1 mr-0 ml-0">
+    <div class="card bg-light w-100">
+        <div class="card-header">ID: @Model.Id</div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.Description</p>
+            <p class="card-text">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Читательские абонементы
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (var subscription in Model.Subscriptions)
+                            {
+                                <li><a class="dropdown-item" href="#">@subscription.Id (@subscription.User.Surname @subscription.User.Name @subscription.User.Patronymic)</a></li>
+                            }
+                         </ul>
+                    </li>
+                </ul>
+            </p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <form asp-area="Admin" asp-controller="SubscriptionType" asp-action="Delete" method="post">
+                <a asp-area="Admin" asp-controller="SubscriptionType" asp-action="Edit" class="btn btn-sm btn-warning" asp-route-typeId=@Model.Id>Редактировать</a>
+                <input type="hidden" name="TypeId" value=@Model.Id />
+                <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+            </form>
+        </div>
+    </div>
+</div>
